@@ -13,8 +13,8 @@ class MenusController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render locals: { menu_items: @current_menu.menu_items } }
-      format.json { render json: @current_menu.menu_items } 
+      format.html { render locals: { menu_items: @current_menu.items } }
+      format.json { render json: @current_menu.items } 
     end
   end
 
@@ -81,7 +81,7 @@ class MenusController < ApplicationController
     end
 
     def set_current_menu
-      @current_menu = Menu.find_by(currently_displayed: true)&.first
+      @current_menu = Menu.find_by(currently_displayed: true)
     end
 
     # Only allow a list of trusted parameters through.
