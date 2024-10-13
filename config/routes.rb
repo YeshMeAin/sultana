@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :items
   get 'pages/under_construction'
   resources :menus
   devise_for :users, skip: [:registrations]
