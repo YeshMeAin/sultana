@@ -3,7 +3,19 @@ class MenusController < ApplicationController
   before_action :set_current_menu, only: :current_menu
 
   def current_menu
-    @menu = @current_menu || Menu.first
+    if @current_menu.blank?
+      respond_to do |format|
+        format.html { redirect_to under_construction_path }
+        format.json { render json: { error: 'No current menu found' }, status: :not_found }
+      end
+
+      return
+    end
+
+    respond_to do |format|
+      format.html { render locals: { menu_items: @current_menu.menu_items } }
+      format.json { render json: @current_menu.menu_items } 
+    end
   end
 
   # GET /menus or /menus.json
@@ -69,7 +81,7 @@ class MenusController < ApplicationController
     end
 
     def set_current_menu
-      @current_menu = Menu.find_by(currently_displayed: true).first
+      @current_menu = Menu.find_by(currently_displayed: true)&.first
     end
 
     # Only allow a list of trusted parameters through.
