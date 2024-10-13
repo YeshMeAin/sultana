@@ -1,5 +1,10 @@
 class MenusController < ApplicationController
   before_action :set_menu, only: %i[ show edit update destroy ]
+  before_action :set_current_menu, only: :current_menu
+
+  def current_menu
+    @menu = @current_menu || Menu.first
+  end
 
   # GET /menus or /menus.json
   def index
@@ -61,6 +66,10 @@ class MenusController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_menu
       @menu = Menu.find(params[:id])
+    end
+
+    def set_current_menu
+      @current_menu = Menu.find_by(currently_displayed: true).first
     end
 
     # Only allow a list of trusted parameters through.
