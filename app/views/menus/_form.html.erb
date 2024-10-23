@@ -22,13 +22,15 @@
   </div>
 
   <div>
-    <%= form.label :text, style: "display: block" %>
-    <%= form.text_field :text %>
+    <%= form.label :currently_displayed, style: "display: block" %>
+    <%= form.check_box :currently_displayed %>
   </div>
 
   <div>
-    <%= form.label :currently_displayed, style: "display: block" %>
-    <%= form.check_box :currently_displayed %>
+    <%= form.label :item_ids, "Items", style: "display: block" %>
+    <%= form.collection_select :item_ids, Item.all, :id, :name, 
+                               { selected: menu.item_ids }, 
+                               { multiple: true, size: 5, class: 'form-control', name: 'menu[item_ids][]' } %>
   </div>
 
   <div>
