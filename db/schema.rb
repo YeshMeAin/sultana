@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_13_104343) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_29_074018) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_104343) do
     t.index ["name"], name: "index_menus_on_name"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "units"
+    t.float "price_per_unit"
+    t.boolean "in_bulk"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_products_on_name"
+  end
+
+  create_table "receipes", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "item_id", null: false
+    t.float "quantity"
+    t.text "instructions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_receipes_on_item_id"
+    t.index ["product_id"], name: "index_receipes_on_product_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,4 +76,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_104343) do
 
   add_foreign_key "menu_items", "items"
   add_foreign_key "menu_items", "menus"
+  add_foreign_key "receipes", "items"
+  add_foreign_key "receipes", "products"
 end

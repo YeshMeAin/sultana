@@ -26,6 +26,22 @@
     <%= form.text_field :price %>
   </div>
 
+  <h3>Add Receipe Items</h3>
+  <div id="receipe-items">
+    <%= fields_for :receipes, @item.receipes.build do |receipe_form| %>
+      <div class="receipe-item">
+        <%= receipe_form.label :product_id, "Product" %>
+        <%= receipe_form.collection_select :product_id, Product.all, :id, :name %>
+
+        <%= receipe_form.label :quantity %>
+        <%= receipe_form.number_field :quantity, step: 0.1 %>
+
+        <%= receipe_form.label :instructions %>
+        <%= receipe_form.text_area :instructions %>
+      </div>
+    <% end %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>

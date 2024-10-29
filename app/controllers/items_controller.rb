@@ -38,6 +38,14 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
+        receipes = params[:receipes]
+        if receipes
+          receipes = [receipes] unless receipes.is_a?(Array)
+          receipes.each do |receipe_params|
+            @item.receipes.create(receipe_params.permit(:product_id, :quantity, :instructions))
+          end
+        end
+
         format.html { redirect_to @item, notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else
@@ -65,6 +73,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :description, :price)
+      params.require(:item).permit(:name, :description, :price, receipes_attributes: [:product_id, :quantity, :instructions])
     end
 end
