@@ -14,6 +14,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 gem "devise"
+gem "cocoon"
 
 group :development, :test do
   gem "byebug"

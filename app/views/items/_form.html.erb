@@ -26,19 +26,23 @@
     <%= form.text_field :price %>
   </div>
 
-  <h3>Add Receipe Items</h3>
-  <div id="receipe-items">
-    <%= fields_for :receipes, @item.receipes.build do |receipe_form| %>
-      <div class="receipe-item">
-        <%= receipe_form.label :product_id, "Product" %>
-        <%= receipe_form.collection_select :product_id, Product.all, :id, :name %>
+  <div data-controller="nested-form">
+    <template data-nested-form-target="template">
+      <%= form.fields_for :recipes, Recipe.new, child_index: 'NEW_RECORD' do |recipe_form| %>
+        <%= render 'recipe_fields', f: recipe_form %>
+      <% end %>
+    </template>
 
-        <%= receipe_form.label :quantity %>
-        <%= receipe_form.number_field :quantity, step: 0.1 %>
+    <div data-nested-form-target="fields">
+      <%= form.fields_for :recipes do |recipe_form| %>
+        <%= render 'recipe_fields', f: recipe_form %>
+      <% end %>
+    </div>
 
-        <%= receipe_form.label :instructions %>
-        <%= receipe_form.text_area :instructions %>
-      </div>
+    <%= button_tag type: 'button',
+                   data: { action: "click->nested-form#add" },
+                   class: 'btn btn-primary' do %>
+      Add Recipe Item
     <% end %>
   </div>
 
