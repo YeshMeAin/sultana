@@ -21,11 +21,6 @@
     <%= form.text_area :description %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
-  </div>
-
   <div data-controller="nested-form">
     <template data-nested-form-target="template">
       <%= form.fields_for :recipes, Recipe.new, child_index: 'NEW_RECORD' do |recipe_form| %>

@@ -26,12 +26,27 @@
     <%= form.check_box :currently_displayed %>
   </div>
 
-  <div>
-    <%= form.label :item_ids, "Items", style: "display: block" %>
-    <%= form.collection_select :item_ids, Item.all, :id, :name, 
-                               { selected: menu.item_ids }, 
-                               { multiple: true, size: 5, class: 'form-control', name: 'menu[item_ids][]' } %>
+  <div data-controller="nested-form">
+    <template data-nested-form-target="template">
+      <%= form.fields_for :items, Item.new, child_index: 'NEW_RECORD' do |item_form| %>
+        <%= render 'item_fields', f: item_form %>
+      <% end %>
+    </template>
+
+    <div data-nested-form-target="fields">
+      <%= form.fields_for :items do |item_form| %>
+        <%= render 'item_fields', f: item_form %>
+      <% end %>
+    </div>
+
+    <%= button_tag type: 'button',
+                   data: { action: "click->nested-form#add" },
+                   class: 'btn btn-primary' do %>
+      Add Menu Item
+    <% end %>
   </div>
+
+  <div>
 
   <div>
     <%= form.submit %>
