@@ -28,14 +28,14 @@
 
   <div data-controller="nested-form">
     <template data-nested-form-target="template">
-      <%= form.fields_for :items, Item.new, child_index: 'NEW_RECORD' do |item_form| %>
-        <%= render 'item_fields', f: item_form %>
+      <%= form.fields_for :menu_items, MenuItem.new, child_index: 'NEW_RECORD' do |menu_item_form| %>
+        <%= render 'menu_item_fields', f: menu_item_form %>
       <% end %>
     </template>
 
     <div data-nested-form-target="fields">
-      <%= form.fields_for :items do |item_form| %>
-        <%= render 'item_fields', f: item_form %>
+      <%= form.fields_for :menu_items do |menu_item_form| %>
+        <%= render 'menu_item_fields', f: menu_item_form %>
       <% end %>
     </div>
 
