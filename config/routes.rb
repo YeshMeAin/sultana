@@ -4,11 +4,14 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root to: 'dashboard#index', as: :authenticated_root
+    
     resources :orders
     resources :customers
     resources :products
     resources :items
     resources :menus
+
+    get 'generate_grocery_list', to: 'dashboard#generate_grocery_list'
   end
 
   unauthenticated do
@@ -16,6 +19,6 @@ Rails.application.routes.draw do
   end
 
   get '/under_construction', to: 'pages#under_construction', as: :under_construction
-  
+
   get "up" => "rails/health#show", as: :rails_health_check
 end

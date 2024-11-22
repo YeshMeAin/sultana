@@ -8,4 +8,11 @@ if Rails.env.development?
 
   MenuItem.create(menu: Menu.first, item: Item.first)
   MenuItem.create(menu: Menu.first, item: Item.second)
+
+  Customer.create(
+    name: 'John Doe', 
+    email: 'john.doe@example.com', 
+    phone: '123-456-7890', 
+    address: '123 Main St, Anytown, USA'
+  )
 end

@@ -22,8 +22,6 @@ module CacheableQueries
       end
     end
 
-    private
-
     def cache_key_prefix
       "#{name.underscore}/v1"
     end

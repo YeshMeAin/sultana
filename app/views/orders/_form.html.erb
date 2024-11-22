@@ -13,7 +13,12 @@
 
   <div>
     <%= form.label :customer_id, style: "display: block" %>
-    <%= form.text_field :customer_id %>
+    <%= form.collection_select :customer_id, 
+                             @customers, 
+                             :id, 
+                             :name, 
+                             { prompt: "Select a customer" }, 
+                             { class: "form-select" } %>
   </div>
 
   <div>
@@ -21,9 +26,25 @@
     <%= form.datetime_field :due_date %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+
+  <div data-controller="nested-form">
+    <template data-nested-form-target="template">
+      <%= form.fields_for :order_items, OrderItem.new, child_index: 'NEW_RECORD' do |order_item_form| %>
+        <%= render 'order_item_fields', f: order_item_form %>
+      <% end %>
+    </template>
+
+    <div data-nested-form-target="fields">
+      <%= form.fields_for :order_items do |order_item_form| %>
+        <%= render 'order_item_fields', f: order_item_form %>
+      <% end %>
+    </div>
+
+    <%= button_tag type: 'button',
+                   data: { action: "click->nested-form#add" },
+                   class: 'btn btn-primary' do %>
+      Add Order Item  
+    <% end %>
   </div>
 
   <div>
