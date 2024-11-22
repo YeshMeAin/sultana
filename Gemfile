@@ -17,7 +17,7 @@ gem "devise"
 gem "cocoon"
 
 group :development, :test do
-  gem "byebug"
+  gem "debug"
 end
 
 group :development do
