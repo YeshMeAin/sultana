@@ -1,0 +1,56 @@
+# Menu Management
+- When in menu-related files, suggest:
+  * Adding menu item associations
+  * Price validation rules
+  * Currently displayed menu logic
+
+# Order System
+- When in order-related files, suggest:
+  * AASM state transitions
+  * Price calculation methods
+  * Order validation rules
+  * Customer associations
+
+# Database
+- When in migration files, suggest:
+  * Appropriate indices
+  * Foreign key constraints
+  * Not null constraints
+  * Default values
+
+# Models
+- When in model files, suggest:
+  * Validation rules
+  * Scopes
+  * Associations
+  * Callback methods
+  * Caching strategies
+
+# Controllers
+- When in controller files, suggest:
+  * Strong parameters
+  * Before actions
+  * Response formats
+  * Authorization rules
+
+# Views
+- When in view files, suggest:
+  * Partial extractions
+  * Helper methods
+  * Form builders
+  * Turbo frames
+
+# Testing
+- When in test files, suggest:
+  * Factory patterns
+  * Test scenarios
+  * Assertions
+  * Mocking strategies
+
+# General
+- Suggest Ruby 3.2.2 syntax improvements
+- Recommend Rails 7.1 best practices
+- Highlight potential N+1 query issues
+- Suggest caching opportunities
+- Recommend security improvements
+- Always consider Okham's razor

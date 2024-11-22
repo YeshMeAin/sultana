@@ -12,6 +12,8 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
+gem 'aasm'
+
 
 gem "devise"
 gem "cocoon"
