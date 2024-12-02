@@ -1,0 +1,20 @@
+Ok, I have a skeletal rails app with the functionalities I need (basic table views, forms, etc).
+Now i want to add styling, css etc to make it look less like shit.
+I want a navbar, nice buttons, decent table views.
+Please specify what i need to do in details. stick to rails principles.
+I want to use tailwind css and stimulus controllers where needed. 
+
+Navbar - 
+Should include a link to the dashboard, as well as to an auto updating list of resources, for each resource the link will go to the index action in the controller.
+The navbar should only be visible when the user is logged in, otherwise display nothing.
+It should be sticky to the top of the screen, and look good on mobile.
+
+Index page - 
+for each resource index page, display a well formatted table of all the records, where which attributes are presented is defined in the model.
+each row should have an edit and view button, which will include more data, also defined in the model. the view and edit should pop up as modals.
+The table should have a search bar, and a button to create a new record.
+The search bar should be used to search for a record in the table.
+The create button should go to the new action in the controller.
+The index screen and all sub-screens (modals) should look good on mobile.
+
+Please set it up so the basic structure of the resource page is set up in a partial, and reused across resource views.

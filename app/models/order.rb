@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   include CacheableQueries
+  include ResourceAttributes
 
   after_commit :clear_cache
 
@@ -54,6 +55,14 @@ class Order < ApplicationRecord
     event :cancel do
       transitions from: [:pending, :confirmed], to: :cancelled
     end
+  end
+
+  def self.table_attributes
+    [:customer, :status, :created_at]
+  end
+
+  def self.show_attributes
+    [:customer, :status, :created_at, :updated_at, :order_items]
   end
 
   def self.average_total_price(since: Time.at(0))

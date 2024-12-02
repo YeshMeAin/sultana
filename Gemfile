@@ -24,9 +24,12 @@ end
 
 group :development do
   gem "web-console"
+  gem 'rerun'
 end
 
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "tailwindcss-rails", "~> 3.0"
