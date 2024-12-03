@@ -1,13 +1,14 @@
 <div id="modal_backdrop" 
-     class="modal-backdrop fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity hidden" 
+     class="modal-backdrop fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity hidden z-[999]" 
      data-resource-table-target="modalBackdrop"
      data-action="click->resource-table#closeModal">
   <div id="flash-modal">
     <%= render "shared/flash", modal_alert: alert %>
   </div>
-  <div class="fixed inset-0 z-10 overflow-y-auto">
-    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-      <div class="relative transform rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+  <div class="fixed inset-0 z-[1000] overflow-y-auto">
+    <div class="flex min-h-full items-center justify-center p-4">
+      <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6"
+           style="min-height: 200px;"
            data-resource-table-target="modalContent"
            data-action="click->resource-table#stopPropagation">
         <%= turbo_frame_tag "modal_content" %>
