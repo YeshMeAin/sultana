@@ -1,10 +1,5 @@
-class CustomersController < ApplicationController
+class CustomersController < ResourceController
   before_action :set_customer, only: %i[ show edit update destroy ]
-
-  # GET /customers or /customers.json
-  def index
-    @customers = Customer.all
-  end
 
   # GET /customers/1 or /customers/1.json
   def show

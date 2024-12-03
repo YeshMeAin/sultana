@@ -1,13 +1,7 @@
-class OrdersController < ApplicationController
+class OrdersController < ResourceController
   before_action :set_order, only: %i[ show edit update destroy ]
   before_action :set_customers, only: %i[ new edit ]
   before_action :set_available_menu_items, only: %i[ new edit ]
-
-  # GET /orders or /orders.json
-  def index
-    @orders = Order.all
-  end
-
   # GET /orders/1 or /orders/1.json
   def show
   end

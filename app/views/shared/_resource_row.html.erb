@@ -1,0 +1,23 @@
+<tr class="resource-row">
+  <% resource_class.table_attributes.each do |attr| %>
+    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= resource.send(attr) %></td>
+  <% end %>
+  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+    <%= link_to "View",
+                "#",
+                class: "text-indigo-600 hover:text-indigo-900",
+                data: {
+                  action: "resource-table#openShowModal",
+                  resource_id: resource.id,
+                  turbo_frame: "resource_modal"
+                } %>
+    <%= link_to "Edit",
+                "#",
+                class: "ml-4 text-indigo-600 hover:text-indigo-900",
+                data: {
+                  action: "resource-table#openEditModal",
+                  resource_id: resource.id,
+                  turbo_frame: "resource_modal"
+                } %>
+  </td>
+</tr>

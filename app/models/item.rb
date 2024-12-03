@@ -8,10 +8,10 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :recipes, reject_if: :all_blank, allow_destroy: true
 
   def self.table_attributes
-    [:name, :email, :phone, :created_at]
+    [:name, :description]
   end
 
   def self.show_attributes
-    [:name, :email, :phone, :created_at, :updated_at, :orders]
+    [:name, :description, :updated_at, :created_at]
   end
 end

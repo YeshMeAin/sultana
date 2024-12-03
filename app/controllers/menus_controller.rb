@@ -1,4 +1,4 @@
-class MenusController < ApplicationController
+class MenusController < ResourceController
   before_action :set_menu, only: %i[ show edit update destroy ]
   before_action :set_current_menu, only: :current_menu
 
@@ -16,11 +16,6 @@ class MenusController < ApplicationController
       format.html { render locals: { menu_items: @current_menu.items } }
       format.json { render json: @current_menu.items } 
     end
-  end
-
-  # GET /menus or /menus.json
-  def index
-    @menus = Menu.all
   end
 
   # GET /menus/1 or /menus/1.json

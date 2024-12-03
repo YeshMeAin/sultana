@@ -58,11 +58,11 @@ class Order < ApplicationRecord
   end
 
   def self.table_attributes
-    [:customer, :status, :created_at]
+    [:customer_name, :status, :created_at]
   end
 
   def self.show_attributes
-    [:customer, :status, :created_at, :updated_at, :order_items]
+    [:customer_name, :customer_phone, :status, :created_at, :updated_at, :order_items]
   end
 
   def self.average_total_price(since: Time.at(0))
@@ -87,6 +87,14 @@ class Order < ApplicationRecord
 
   def count
     order_items.count
+  end
+
+  def customer_name
+    customer.name
+  end
+
+  def customer_phone
+    customer.phone
   end
 
   private

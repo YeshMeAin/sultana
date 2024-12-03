@@ -13,6 +13,6 @@ module ResourceAttributes
 
   def self.available_resources
     Rails.application.eager_load!
-    ApplicationRecord.descendants.select { |model| model.respond_to?(:table_attributes) }
+    ApplicationRecord.descendants.select { |model| model.respond_to?(:table_attributes) && model.table_attributes.any? }
   end
 end
