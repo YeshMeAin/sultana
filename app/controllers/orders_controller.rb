@@ -1,6 +1,6 @@
 class OrdersController < ResourceController
-  before_action :set_customers, only: %i[ new edit ]
-  before_action :set_available_menu_items, only: %i[ new edit ]
+  before_action :set_customers, only: %i[ new edit create update ]
+  before_action :set_available_menu_items, only: %i[ new edit create update ]
 
   private
     def set_customers

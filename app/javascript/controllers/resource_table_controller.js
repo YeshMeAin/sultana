@@ -25,13 +25,22 @@ export default class extends Controller {
   }
 
   openModal(url) {
-    const frame = document.getElementById('modal_content')
-    const newFrame = document.createElement('turbo-frame')
-    newFrame.id = 'modal_content'
-    newFrame.src = url
-    frame.replaceWith(newFrame)
-    
-    this.modalBackdropTarget.classList.remove('hidden')
+    const frame = document.getElementById('modal_content');
+
+    // If the modal content doesn't exist, create it
+    if (!frame) {
+      const newFrame = document.createElement('turbo-frame');
+      newFrame.id = 'modal_content';
+      document.body.appendChild(newFrame);
+    }
+  
+    // Replace the modal content by setting the Turbo Frame's src
+    const newFrame = document.createElement('turbo-frame');
+    newFrame.id = 'modal_content';
+    newFrame.src = url;
+  
+    frame.replaceWith(newFrame); // Replace the old content with the new Turbo Frame
+    this.modalBackdropTarget.classList.remove('hidden'); // Show the modal backdrop
   }
 
   closeModal() {

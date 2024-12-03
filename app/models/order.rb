@@ -58,11 +58,11 @@ class Order < ApplicationRecord
   end
 
   def self.table_attributes
-    [:customer_name, :status, :created_at]
+    [:customer_name, :status, :due_date, :created_at]
   end
 
   def self.show_attributes
-    [:customer_name, :customer_phone, :status, :created_at, :updated_at, :order_items]
+    [:customer_name, :customer_phone, :status, :created_at, :due_date, :updated_at, :order_items]
   end
 
   def self.average_total_price(since: Time.at(0))
@@ -105,6 +105,6 @@ class Order < ApplicationRecord
 
   def has_valid_items
     errors.add(:base, "Order must have at least one item") if order_items.empty?
-    errors.add(:base, "Order items must have positive quantities") if order_items.any? { |item| item.quantity <= 0 }
+    errors.add(:base, "Order items must have positive quantities") if order_items.any? { |item| item.quantity.to_f <= 0 }
   end
 end

@@ -48,14 +48,13 @@ class ResourceController < ApplicationController
       if @resource.save
         format.turbo_stream { 
           render turbo_stream: [
-            turbo_stream.update("#{controller_name}", partial: "shared/resource_table", locals: { resources: resource_class.all, resource_class: @resource_class }),
-            turbo_stream.update("modal_content", ""),
-            turbo_stream.replace("modal_backdrop", 
-              '<div id="modal_backdrop" class="modal-backdrop fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity hidden" data-resource-table-target="modalBackdrop" data-action="click->resource-table#closeModal"></div>'
-            ),
-            turbo_stream.replace("flash", 
+            turbo_stream.prepend("flash", 
               render_to_string(partial: "shared/flash", locals: { notice: "#{resource_name.titleize} was successfully created." })
-            )
+            ),
+            turbo_stream.replace("modal_backdrop",
+              render_to_string(partial: "shared/modal")
+            ),
+            turbo_stream.update("#{controller_name}", partial: "shared/resource_table", locals: { resources: resource_class.all })
           ]
         }
         format.html { redirect_to url_for(controller: controller_name, action: :index), notice: "#{resource_name.titleize} was successfully created." }
@@ -78,15 +77,23 @@ class ResourceController < ApplicationController
       if @resource.update(trusted_params)
         format.turbo_stream {
           render turbo_stream: [
+            turbo_stream.replace("modal_backdrop",
+              render_to_string(partial: "shared/modal")
+            ),
             turbo_stream.update("#{controller_name}", partial: "shared/resource_table", locals: { resources: resource_class.all }),
-            turbo_stream.update("modal_content", ""),
-            turbo_stream.update("modal_backdrop", ""),
             turbo_stream.prepend("flash", partial: "shared/flash", locals: { notice: "#{resource_name.titleize} was successfully updated." })
           ]
         }
         format.html { redirect_to url_for(controller: controller_name, action: :index), notice: "#{resource_name.titleize} was successfully updated." }
       else
-        format.turbo_stream { render partial: "shared/edit_modal", locals: { resource: @resource } }
+        format.turbo_stream {
+          render turbo_stream: [
+            turbo_stream.prepend("flash", 
+              render_to_string(partial: "shared/flash", locals: { modal_alert: @resource.errors.full_messages.join(', ') })
+            )
+          ]
+        }
+
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
