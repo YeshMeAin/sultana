@@ -1,0 +1,6 @@
+<tr class="associated-collection-row">
+  <% collection_item.attributes.keys.each do |attr| %>
+    <% next if attr == 'id' %>
+    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= collection_item.send(attr) %></td>
+  <% end %>
+</tr>

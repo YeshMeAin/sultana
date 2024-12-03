@@ -62,7 +62,7 @@ class Order < ApplicationRecord
   end
 
   def self.show_attributes
-    [:customer_name, :customer_phone, :status, :created_at, :due_date, :updated_at, :order_items]
+    [:customer_name, :customer_phone, :status, :created_at, :due_date, :updated_at]
   end
 
   def self.average_total_price(since: Time.at(0))
@@ -76,6 +76,14 @@ class Order < ApplicationRecord
         .first
 
     result.try(:[], 'average_order_value') || 0
+  end
+
+  def associated_collections
+    [{
+      name: 'Order Items',
+      collection: order_items.joins(menu_item: :item)
+        .select('items.name AS item_name, menu_items.price AS item_price, order_items.quantity, (order_items.quantity * menu_items.price) AS total_price, order_items.notes')
+    }]
   end
 
   def total_price

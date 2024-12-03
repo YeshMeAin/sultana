@@ -10,4 +10,9 @@ class ApplicationRecord < ActiveRecord::Base
     # Override in each model
     []
   end
+
+  def self.associated_collections
+    # Override in each model
+    []
+  end
 end

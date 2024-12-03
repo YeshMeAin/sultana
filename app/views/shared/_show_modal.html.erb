@@ -1,21 +1,43 @@
 <%= turbo_frame_tag "modal_content" do %>
-  <div class="modal">
-    <div class="modal-header">
+  <div class="modal z-50 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="modal-header p-4 border-b">
       <h2 class="text-lg font-medium text-gray-900"><%= resource.class.name %> Details</h2>
       <button type="button" 
               class="absolute top-3 right-3 text-gray-400 hover:text-gray-500"
               data-action="resource-table#closeModal">
         <span class="sr-only">Close</span>
-        × <%# Simple close button %>
+        ×
       </button>
     </div>
 
-    <div class="modal-body mt-4">
+    <div class="modal-body p-4 overflow-auto">
       <% resource.class.show_attributes.each do |attr| %>
         <div class="mb-4">
           <strong class="text-gray-700"><%= attr.to_s.titleize %>:</strong>
           <span class="ml-2 text-gray-900"><%= resource.send(attr) %></span>
         </div>
+      <% end %>
+
+      <% if resource_collections.any? %>
+        <% resource_collections.each do |collection| %>
+          <h3 class="text-lg font-medium text-gray-900"><%= collection[:name] %></h3>
+
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <% collection[:collection].first.attributes.keys.each do |attr| %>
+                  <% next if attr == 'id' %>
+                  <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"><%= attr.to_s.titleize %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% collection[:collection].each do |collection_item| %>
+                <%= render partial: "shared/associated_collection_row", locals: { collection_item: collection_item } %>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -3,6 +3,8 @@ class ResourceController < ApplicationController
   
   before_action :set_resource, only: %i[ show edit update destroy ]
   before_action :set_resource_class_and_name
+  before_action :set_resource_collections, only: %i[ show ]
+
 
   def index
     instance_variable_set("@resources", resource_class.all)
@@ -13,7 +15,7 @@ class ResourceController < ApplicationController
   def show
     respond_to do |format|
       format.turbo_stream
-      format.html { render partial: 'shared/show_modal', locals: { resource: @resource } }
+      format.html { render partial: 'shared/show_modal', locals: { resource: @resource, resource_collections: @resource_collections } }
     end
   end
 
@@ -100,6 +102,10 @@ class ResourceController < ApplicationController
   end
 
   private
+
+  def set_resource_collections
+    @resource_collections = (@resource || set_resource).associated_collections
+  end
 
   def set_resource_class_and_name
     @resource_class = resource_class
