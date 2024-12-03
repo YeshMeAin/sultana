@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "modal_content" do %>
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="text-lg font-medium text-gray-900">New <%= resource.class.name %></h2>
+      <button type="button" 
+              class="absolute top-3 right-3 text-gray-400 hover:text-gray-500"
+              data-action="resource-table#closeModal">
+        <span class="sr-only">Close</span>
+        × <%# Simple close button %>
+      </button>
+    </div>
+
+    <div class="modal-body mt-4">
+      <%= render "shared/resource_form", resource_name: resource.class.name, resource: resource %>
+    </div>
+  </div>
+<% end %>

@@ -1,10 +1,6 @@
 class ItemsController < ResourceController
   before_action :set_item, only: %i[ show edit update destroy ]
 
-  # GET /items/1 or /items/1.json
-  def show
-  end
-
   # GET /items/new
   def new
     @item = Item.new

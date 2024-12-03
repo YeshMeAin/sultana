@@ -18,10 +18,6 @@ class MenusController < ResourceController
     end
   end
 
-  # GET /menus/1 or /menus/1.json
-  def show
-  end
-
   # GET /menus/new
   def new
     @menu = Menu.new

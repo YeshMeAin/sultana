@@ -1,6 +1,8 @@
 class Customer < ApplicationRecord
   include ResourceAttributes
 
+  has_many :orders
+
   def self.table_attributes
     [:name, :email, :phone, :created_at]
   end

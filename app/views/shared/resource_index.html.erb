@@ -1,4 +1,6 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-controller="resource-table">
+  <%= render "shared/modal" %>
+
   <div class="sm:flex sm:items-center py-5">
     <div class="sm:flex-auto">
       <h1 class="text-2xl font-semibold text-gray-900"><%= @resource_name.pluralize.titleize %></h1>
@@ -24,29 +26,7 @@
     </div>
   </div>
 
-  <div class="mt-8 flex flex-col">
-    <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-300">
-            <thead class="bg-gray-50">
-              <tr>
-                <% @resource_class.table_attributes.each do |attr| %>
-                  <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"><%= attr.to_s.titleize %></th>
-                <% end %>
-                <th class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                  <span class="sr-only">Actions</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 bg-white" data-resource-table-target="tableBody">
-              <%= render partial: "shared/resource_row", collection: @resources, as: :resource, locals: { resource_class: @resource_class } %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  <div id="<%= controller_name %>">
+    <%= render partial: "shared/resource_table", locals: { resources: @resources, resource_class: @resource_class } %>
   </div>
 </div>
-
-<%= turbo_frame_tag "resource_modal" %>

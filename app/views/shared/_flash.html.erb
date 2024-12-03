@@ -1,0 +1,15 @@
+<% if notice %>
+  <div class="notice mb-4 rounded-md bg-green-50 p-4 text-green-800" 
+       data-controller="flash"
+       data-flash-target="message">
+    <%= notice %>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert mb-4 rounded-md bg-red-50 p-4 text-red-800" 
+       data-controller="flash"
+       data-flash-target="message">
+    <%= alert %>
+  </div>
+<% end %>

@@ -1,0 +1,3 @@
+<%= form_with(model: resource, data: { controller: "resource-form" }) do |form| %>
+  <%= render "#{resource_name.downcase.pluralize}/form", { "#{resource_name.downcase}": resource, form: form } %>
+<% end %>

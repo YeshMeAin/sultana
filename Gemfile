@@ -25,6 +25,7 @@ end
 group :development do
   gem "web-console"
   gem 'rerun'
+  gem 'foreman', '~> 0.87.2'
 end
 
 group :test do
