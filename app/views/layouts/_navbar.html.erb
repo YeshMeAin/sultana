@@ -2,16 +2,16 @@
   <nav class="sticky top-0 bg-white shadow-md z-50" data-controller="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
-        <div class="flex">
-          <%= link_to authenticated_root_path, class: "flex items-center" do %>
-            <span class="text-xl font-bold text-gray-800">Dashboard</span>
+        <div class="flex items-center">
+          <%= link_to authenticated_root_path, class: "flex-shrink-0" do %>
+            <span class="text-2xl font-bold text-gray-800">Dashboard</span>
           <% end %>
           
-          <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+          <div class="hidden sm:flex sm:ml-10 space-x-12">
             <% ResourceAttributes.available_resources.each do |resource| %>
               <%= link_to resource.model_name.human.pluralize,
-              polymorphic_path(resource.model_name.route_key),
-              class: "nav-link" %>
+                polymorphic_path(resource.model_name.route_key),
+                class: "text-lg font-medium #{current_page?(polymorphic_path(resource.model_name.route_key)) ? 'text-indigo-600' : 'text-gray-500 hover:text-gray-900'}" %>
             <% end %>
           </div>
         </div>
@@ -20,7 +20,6 @@
         <div class="sm:hidden flex items-center">
           <button data-action="navbar#toggleMenu" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
             <span class="sr-only">Open main menu</span>
-            <!-- Icon for menu -->
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -35,7 +34,7 @@
         <% ResourceAttributes.available_resources.each do |resource| %>
           <%= link_to resource.model_name.human.pluralize,
                      polymorphic_path(resource.model_name.route_key),
-                     class: "block pl-3 pr-4 py-2 border-l-4 text-base font-medium #{current_page?(polymorphic_path(resource.model_name.route_key)) ? 'border-indigo-500 text-indigo-700 bg-indigo-50' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'}" %>
+                     class: "block px-4 py-2 text-base font-medium #{current_page?(polymorphic_path(resource.model_name.route_key)) ? 'text-indigo-600 bg-indigo-50' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'}" %>
         <% end %>
       </div>
     </div>
