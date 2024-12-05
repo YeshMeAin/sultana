@@ -19,4 +19,12 @@ class Item < ApplicationRecord
   def self.show_attributes
     [:name, :description, :updated_at, :created_at]
   end
+
+  def associated_collections
+    [{
+      name: 'Recipes',
+      collection: recipes.joins(:product)
+        .select('products.name as product_name, recipes.quantity as quantity, products.units as product_units')
+    }]
+  end
 end

@@ -25,7 +25,9 @@
           <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50">
               <tr>
-                <% collection[:collection].first.attributes.keys.each do |attr| %>
+                <% is_active_record_collection = collection[:collection].first.is_a?(ActiveRecord::Base) %>
+                <% keys_to_iterate = is_active_record_collection ? collection[:collection].first.attributes.keys : collection[:collection].first.keys %>
+                <% keys_to_iterate.each do |attr| %>
                   <% next if attr == 'id' %>
                   <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"><%= attr.to_s.titleize %></th>
                 <% end %>
@@ -33,7 +35,7 @@
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
               <% collection[:collection].each do |collection_item| %>
-                <%= render partial: "shared/associated_collection_row", locals: { collection_item: collection_item } %>
+                <%= render partial: "shared/associated_collection_row", locals: { collection_item: collection_item, keys_to_iterate: keys_to_iterate } %>
               <% end %>
             </tbody>
           </table>

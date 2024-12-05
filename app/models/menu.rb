@@ -14,7 +14,15 @@ class Menu < ApplicationRecord
   end
 
   def self.show_attributes
-    [:name, :description, :currently_displayed, :created_at, :updated_at, :menu_items]
+    [:name, :description, :currently_displayed, :created_at, :updated_at]
+  end
+
+  def associated_collections
+    [{
+      name: 'Menu Items',
+      collection: menu_items.joins(:item)
+        .select('items.name as item_name, menu_items.price as price')
+    }]
   end
 end
 

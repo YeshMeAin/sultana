@@ -1,6 +1,6 @@
 <tr class="associated-collection-row">
-  <% collection_item.attributes.keys.each do |attr| %>
+  <% keys_to_iterate.each do |attr| %>
     <% next if attr == 'id' %>
-    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= collection_item.send(attr) %></td>
+    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= collection_item.is_a?(ActiveRecord::Base) ? collection_item.send(attr) : collection_item[attr] %></td>
   <% end %>
 </tr>
