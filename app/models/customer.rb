@@ -3,6 +3,8 @@ class Customer < ApplicationRecord
 
   has_many :orders
 
+  validates :name, :phone, presence: true
+
   def self.table_attributes
     [:name, :email, :phone, :created_at]
   end
