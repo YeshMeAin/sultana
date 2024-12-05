@@ -6,8 +6,15 @@ export default class extends Controller {
   connect() {
     this.fieldsTarget.querySelectorAll('select').forEach(select => {
       select.addEventListener('change', this.updatePrice.bind(this))
-      this.updatePrice({ target: select })
+      this.setInitialPrice(select)
     })
+  }
+
+  setInitialPrice(select) {
+    const priceField = select.closest('.menu-item-fields').querySelector('input[name*="[price]"]')
+    if (priceField && !priceField.value) {
+      this.updatePrice({ target: select })
+    }
   }
 
   add(event) {
