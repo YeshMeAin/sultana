@@ -7,13 +7,14 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_items, dependent: :destroy
   accepts_nested_attributes_for :order_items, allow_destroy: true
-  has_many :menu_items, through: :order_items
+  has_many :items, through: :order_items
 
   validates :customer, presence: true
   validates :order_items, presence: true, unless: :cancelled?
   validate :has_valid_items, unless: :cancelled?
 
   scope :since, ->(date) { where('orders.created_at > ?', date) } # explicit call to orders table is to allow usage with joins
+  scope :open_orders, -> { where.not(status: 'paid').order(created_at: :desc).includes(:customer) }
 
   enum status: {
     pending: 0,
@@ -58,7 +59,7 @@ class Order < ApplicationRecord
   end
 
   def self.table_attributes
-    [:customer_name, :status, :due_date, :created_at]
+    [:customer_name, :status, :due_date, :total_price]
   end
 
   def self.show_attributes
@@ -66,31 +67,26 @@ class Order < ApplicationRecord
   end
 
   def self.average_total_price(since: Time.at(0))
-    result =Order.since(since)
-        .joins(order_items: :menu_item)
+    result = Order.since(since)
+        .joins(:order_items)
         .select(
-          'orders.id AS order_id',
-          'AVG(order_items.quantity * menu_items.price) AS average_order_value'
+          'AVG(order_items.quantity * order_items.price) AS average_order_value'
         )
         .group('orders.id')
-        .first
-
-    result.try(:[], 'average_order_value') || 0
+    
+    result.average('average_order_value')
   end
 
   def associated_collections
     [{
       name: 'Order Items',
-      collection: order_items.joins(menu_item: :item)
-        .select('items.name AS item_name, menu_items.price AS item_price, order_items.quantity, (order_items.quantity * menu_items.price) AS total_price, order_items.notes')
+      collection: order_items.joins(:item)
+        .select('items.name AS item_name, order_items.price AS item_price, order_items.quantity, (order_items.quantity * order_items.price) AS total_price, order_items.notes')
     }]
   end
 
   def total_price
-    order_items
-      .joins(:menu_item)
-      .select('SUM(menu_items.price * order_items.quantity) as order_total')
-      .pick('order_total') || 0
+    order_items.sum { |item| item.price * item.quantity }
   end
 
   def count

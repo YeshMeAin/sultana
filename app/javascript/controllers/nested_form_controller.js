@@ -3,10 +3,18 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["template", "fields"]
 
+  connect() {
+    this.fieldsTarget.querySelectorAll('select').forEach(select => {
+      select.addEventListener('change', this.updatePrice.bind(this))
+      this.updatePrice({ target: select })
+    })
+  }
+
   add(event) {
     event.preventDefault()
     const content = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, new Date().getTime())
     this.fieldsTarget.insertAdjacentHTML('beforeend', content)
+    this.fieldsTarget.lastElementChild.querySelector('select').addEventListener('change', this.updatePrice.bind(this))
   }
 
   remove(event) {
@@ -17,6 +25,17 @@ export default class extends Controller {
     } else {
       wrapper.style.display = 'none'
       wrapper.querySelector("input[name*='_destroy']").value = 1
+    }
+  }
+
+  updatePrice(event) {
+    const select = event.target
+    const prices = JSON.parse(select.dataset.prices)
+    const selectedItemId = select.value
+    const price = prices[selectedItemId] || 0
+    const priceField = select.closest('.menu-item-fields').querySelector('input[name*="[price]"]')
+    if (priceField) {
+      priceField.value = price
     }
   }
 }

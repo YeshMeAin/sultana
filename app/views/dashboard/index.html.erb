@@ -1,26 +1,30 @@
-<div class="admin-dashboard">
-  <h1>Admin Dashboard</h1>
-
-  <div class="dashboard-stats">
-    <div class="stat-card">
-      <h3>Orders This Month</h3>
-      <p class="stat-number"><%= @orders_count_this_month %></p>
-    </div>
-    <div class="stat-card">
-      <h3>Average Order Value</h3>
-      <p class="stat-number"><%= number_to_currency(@average_order_value) %></p>
-    </div>
-    <div class="stat-card">
-      <h3>Revenue This Month</h3>
-      <p class="stat-number"><%= number_to_currency(@payed_this_month) %></p>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center py-5">
+    <div class="sm:flex-auto">
+      <h1 class="text-2xl font-semibold text-gray-900">Admin Dashboard</h1>
     </div>
   </div>
 
-  <div class="dashboard-actions">
-    <h2>Quick Actions</h2>
-    <div class="action-buttons">
-      <%= link_to "New Order", new_order_path, class: "btn btn-primary" %>
-      <%= link_to "Generate Grocery List", generate_grocery_list_path, class: "btn btn-success" %>
+  <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
+    <div class="overflow-hidden rounded-lg bg-white shadow">
+      <div class="p-5">
+        <h3 class="text-sm font-medium text-gray-500">Orders This Month</h3>
+        <p class="mt-1 text-3xl font-semibold text-gray-900"><%= @orders_count_this_month %></p>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-lg bg-white shadow">
+      <div class="p-5">
+        <h3 class="text-sm font-medium text-gray-500">Average Order Value</h3>
+        <p class="mt-1 text-3xl font-semibold text-gray-900"><%= number_to_currency(@average_order_value) %></p>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-lg bg-white shadow">
+      <div class="p-5">
+        <h3 class="text-sm font-medium text-gray-500">Revenue This Month</h3>
+        <p class="mt-1 text-3xl font-semibold text-gray-900"><%= number_to_currency(@payed_this_month) %></p>
+      </div>
     </div>
   </div>
 </div>

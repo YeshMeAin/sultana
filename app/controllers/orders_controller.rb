@@ -9,9 +9,10 @@ class OrdersController < ResourceController
 
     def set_available_menu_items
       @available_menu_items = MenuItem.currently_displayed
+      @off_menu_items = Item.all
     end
 
     def trusted_params
-      params.require(:order).permit(:customer_id, :due_date, order_items_attributes: [:menu_item_id, :quantity, :_destroy])
+      params.require(:order).permit(:customer_id, :due_date, order_items_attributes: [:id, :item_id, :quantity, :price, :_destroy])
     end
 end

@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
     
     @orders_count_this_month = Order.cached_count
     @average_order_value = Order.average_total_price
+    @open_orders = Order.open_orders
   end
 
   def generate_grocery_list
