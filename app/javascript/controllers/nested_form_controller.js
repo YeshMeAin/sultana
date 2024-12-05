@@ -21,7 +21,8 @@ export default class extends Controller {
     event.preventDefault()
     const content = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, new Date().getTime())
     this.fieldsTarget.insertAdjacentHTML('beforeend', content)
-    this.fieldsTarget.lastElementChild.querySelector('select').addEventListener('change', this.updatePrice.bind(this))
+    const newSelect = this.fieldsTarget.lastElementChild.querySelector('select')
+    newSelect.addEventListener('change', this.updatePrice.bind(this))
   }
 
   remove(event) {

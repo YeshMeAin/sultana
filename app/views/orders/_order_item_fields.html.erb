@@ -2,9 +2,9 @@
   <div class="menu-item-fields flex items-center gap-4">
     <div class="flex-grow">
       <%= f.label :item_id, "Item" %>
-      <%= f.collection_select :item_id, @available_menu_items, :item_id, :name, { prompt: "Select an item" },
+      <%= f.collection_select :item_id, @available_items, :item_id, :name, { prompt: "Select an item" },
             { class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-              data: { prices: @available_menu_items.map { |mi| [mi.item_id, mi.price] }.to_h.to_json } } %>
+              data: { prices: @available_items.map { |i| [i.item_id, i.price] }.to_h.to_json } } %>
     </div>
 
     <div class="w-32">
