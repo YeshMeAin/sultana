@@ -73,8 +73,9 @@ class Order < ApplicationRecord
           'AVG(order_items.quantity * order_items.price) AS average_order_value'
         )
         .group('orders.id')
+        .to_a
     
-    result.average('average_order_value')
+    result.sum { |row| row['average_order_value'] } / result.size
   end
 
   def associated_collections
