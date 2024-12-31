@@ -1,0 +1,34 @@
+<div class="nested-fields" data-new-record="<%= f.object.new_record? %>">
+  <div class="menu-item-fields flex items-center gap-4">
+    <div class="flex-grow">
+      <%= f.label :product_id, "Product" %>
+      <%= f.collection_select :product_id, @available_products, :id, :name, { prompt: "Select a product" },
+            { class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+    </div>
+
+    <div class="w-32">
+      <%= f.label "Quantity" %>
+      <%= f.number_field :quantity_for_display, step: 0.5,
+            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+    </div>
+
+    <div class="w-32">
+      <%= f.label "Units" %>
+      <%= f.text_field :units_for_display,
+            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+    </div>
+
+    <%= f.hidden_field :_destroy %>
+    
+    <div class="flex items-end pb-1">
+      <%= button_tag type: 'button',
+                     data: { action: "click->nested-form#remove" },
+                     class: "text-red-600 hover:text-red-900" do %>
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+        </svg>
+        <span class="sr-only">Remove</span>
+      <% end %>
+    </div>
+  </div>
+</div> 

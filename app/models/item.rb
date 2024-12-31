@@ -22,9 +22,9 @@ class Item < ApplicationRecord
 
   def associated_collections
     [{
-      name: 'Recipes',
+      name: 'Recipe',
       collection: recipes.joins(:product)
-        .select('products.name as product_name, recipes.quantity as quantity, products.units as product_units')
+        .select('products.name as product_name, recipes.quantity_for_display as quantity, recipes.units_for_display as units')
     }]
   end
 end
