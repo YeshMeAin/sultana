@@ -19,4 +19,9 @@ module ResourceAttributes
         model.show_attributes.any?
     end.sort_by(&:name)
   end
+
+  def associated_collections
+    []
+  end
+
 end

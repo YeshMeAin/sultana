@@ -104,7 +104,7 @@ class ResourceController < ApplicationController
   private
 
   def set_resource_collections
-    @resource_collections = (@resource || set_resource).try(:associated_collections) || []
+    @resource_collections = (@resource || set_resource).associated_collections
   end
 
   def set_resource_class_and_name

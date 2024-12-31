@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :menus
 
     get 'generate_grocery_list', to: 'dashboard#generate_grocery_list'
+    get 'current_menu', to: 'menus#current_menu', as: :current_menu
   end
 
   unauthenticated do

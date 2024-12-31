@@ -13,8 +13,8 @@ class MenusController < ResourceController
     end
 
     respond_to do |format|
-      format.html { render locals: { menu_items: @current_menu.items } }
-      format.json { render json: @current_menu.items } 
+      format.html { render 'current_menu' }
+      format.json { render json: @menu_items } 
     end
   end
 
@@ -26,6 +26,7 @@ class MenusController < ResourceController
 
     def set_current_menu
       @current_menu = Menu.find_by(currently_displayed: true)
+      @menu_items = @current_menu.associated_collections
     end
 
     # Only allow a list of trusted parameters through.
