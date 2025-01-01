@@ -10,10 +10,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="min-h-screen bg-gray-50">
+  <body class="m-0 p-0">
     <%= render "layouts/navbar" %>
-    
-    <main class="container mx-auto mt-6 px-4">
+    <main class="mt-[64px]">
       <div id="flash">
         <%= render "shared/flash", notice: notice, alert: alert %>
       </div>

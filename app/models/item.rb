@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   include ResourceAttributes
 
+  belongs_to :category, optional: true
+
   has_many :menu_items
   has_many :menus, through: :menu_items
 

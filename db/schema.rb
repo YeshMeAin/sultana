@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_09_195154) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_01_214143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "display_name"
+    t.string "slug"
+    t.boolean "is_active", default: true
+    t.integer "sort_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name", null: false
@@ -30,6 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_09_195154) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["name"], name: "index_items_on_name"
   end
 
@@ -111,6 +122,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_09_195154) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "items", "categories"
   add_foreign_key "menu_items", "items"
   add_foreign_key "menu_items", "menus"
   add_foreign_key "order_items", "items"

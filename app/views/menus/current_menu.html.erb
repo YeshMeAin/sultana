@@ -1,1 +1,15 @@
-<p>Current Menu</p>
+<div 
+  data-controller="menu-frame"
+  class="fixed inset-0 top-[64px] bottom-0 md:top-[64px] sm:top-[56px]"
+>
+  <div 
+    data-menu-frame-target="frame"
+    class="absolute inset-0
+           border-[20px] sm:border-[30px] md:border-[40px]"
+    style="border-image: url(<%= asset_path('smaller_succulent_pattern.png') %>) 40 repeat;"
+  >
+    <div class="p-2 sm:p-3 md:p-4">
+      <p>Current Menu</p>
+    </div>
+  </div>
+</div>

@@ -18,7 +18,7 @@
         </div>
       <% end %>
 
-      <% if resource_collections.any? %>
+      <% if resource_collections.any? { |collection| collection[:collection].any? } %>
         <% resource_collections.each do |collection| %>
           <h3 class="text-lg font-medium text-gray-900"><%= collection[:name] %></h3>
 

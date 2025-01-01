@@ -76,4 +76,13 @@ Rails.application.configure do
 
   # Set default URL options for Devise mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+    # Configure logging to STDOUT with custom formatter
+    config.logger = ActiveSupport::Logger.new(STDOUT)
+    config.logger.formatter = proc do |severity, datetime, progname, msg|
+      "#{datetime} [#{severity}] #{msg}\n"
+    end
+    
+    # Optional: Set log level (default is :debug)
+    config.log_level = :debug
 end
