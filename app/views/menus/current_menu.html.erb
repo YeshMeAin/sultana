@@ -1,15 +1,23 @@
-<div 
-  data-controller="menu-frame"
-  class="fixed inset-0 top-[64px] bottom-0 md:top-[64px] sm:top-[56px]"
->
-  <div 
-    data-menu-frame-target="frame"
-    class="absolute inset-0
-           border-[20px] sm:border-[30px] md:border-[40px]"
-    style="border-image: url(<%= asset_path('smaller_succulent_pattern.png') %>) 40 repeat;"
-  >
-    <div class="p-2 sm:p-3 md:p-4">
-      <p>Current Menu</p>
+<div class="min-h-screen bg-cover bg-repeat" style="background-image: url(<%= asset_path('smaller_succulent_pattern.png') %>); background-size: 300px;">
+  <h1 class="text-3xl font-bold text-center py-4 bg-white bg-opacity-90 max-w-md mx-auto"><%= @current_menu.name %></h1>
+  
+  <% @menu_items.group_by(&:category_name).each do |category, items| %>
+    <div class="max-w-md md:max-w-lg lg:max-w-6xl mx-auto px-6 py-8 bg-white bg-opacity-90 rounded-lg shadow-lg mt-12">
+      <div class="text-2xl font-semibold text-center mb-8 text-gray-800">
+        <%= category %>
+      </div>
+      
+      <div class="space-y-6">
+        <% items.each do |item| %>
+          <div class="menu-item text-center">
+            <div class="flex justify-center items-baseline border-b border-dotted border-gray-300 pb-1">
+              <h3 class="text-lg font-medium"><%= item.item_name %></h3>
+              <span class="text-lg font-medium ml-4"><%= number_to_currency(item.price) %></span>
+            </div>
+            <p class="text-gray-600 text-sm mt-2"><%= item.item_description %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

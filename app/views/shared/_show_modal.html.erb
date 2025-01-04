@@ -18,8 +18,8 @@
         </div>
       <% end %>
 
-      <% if resource_collections.any? { |collection| collection[:collection].any? } %>
-        <% resource_collections.each do |collection| %>
+      <% if resource_collections.any? %>
+        <% resource_collections.select { |collection| collection[:collection].any? }.each do |collection| %>
           <h3 class="text-lg font-medium text-gray-900"><%= collection[:name] %></h3>
 
           <table class="min-w-full divide-y divide-gray-300">

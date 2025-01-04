@@ -26,11 +26,11 @@ class MenusController < ResourceController
 
     def set_current_menu
       @current_menu = Menu.find_by(currently_displayed: true)
-      @menu_items = @current_menu.associated_collections
+      @menu_items = @current_menu.menu_items_for_display
     end
 
     # Only allow a list of trusted parameters through.
     def trusted_params
-      params.require(:menu).permit(:name, :description, :text, :currently_displayed, menu_items_attributes: [:item_id, :price, :_destroy])
+      params.require(:menu).permit(:name, :description, :text, :currently_displayed, menu_items_attributes: [:id, :item_id, :price, :_destroy])
     end
 end
