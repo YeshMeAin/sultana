@@ -5,7 +5,14 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: 'dashboard#index', as: :authenticated_root
     
-    resources :orders
+    resources :orders do
+      post :confirm, on: :member
+      post :prepare, on: :member
+      post :ready, on: :member
+      post :deliver, on: :member
+      post :pay, on: :member
+    end
+
     resources :customers
     resources :products
     resources :items

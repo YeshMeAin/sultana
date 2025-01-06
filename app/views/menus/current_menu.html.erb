@@ -1,26 +1,26 @@
-<div class="min-h-screen bg-cover bg-repeat" style="background-image: url(<%= asset_path('smaller_succulent_pattern.png') %>); background-size: 300px;">
-  <h1 class="text-3xl font-bold text-center py-4 bg-white bg-opacity-90 max-w-md mx-auto"><%= @current_menu.name %></h1>
+<div class="min-h-screen bg-cover bg-repeat" style="background-image: url(<%= asset_path('smaller_succulent_pattern.png') %>); background-size: 300px;" role="img" aria-label="Decorative background pattern">
+  <h1 class="text-3xl font-bold text-center py-4 bg-white bg-opacity-90 max-w-md mx-auto" tabindex="0"><%= @current_menu.name %></h1>
   
   <% @menu_items.group_by(&:category_name).each do |category, items| %>
-    <div class="max-w-md md:max-w-lg lg:max-w-6xl mx-auto px-6 py-8 bg-white bg-opacity-90 rounded-lg shadow-lg mt-12">
-      <div class="text-2xl font-semibold text-center mb-8 text-gray-800">
+    <section class="max-w-md md:max-w-lg lg:max-w-6xl mx-auto px-6 py-8 bg-white bg-opacity-90 rounded-lg shadow-lg mt-12" aria-labelledby="category-<%= category.parameterize %>">
+      <h2 id="category-<%= category.parameterize %>" class="text-2xl font-semibold text-center mb-8 text-gray-800" tabindex="0">
         <%= category %>
-      </div>
+      </h2>
       
-      <div class="space-y-6">
+      <ul class="space-y-6">
         <% items.each_with_index do |item, index| %>
-          <div class="menu-item text-center">
+          <li class="menu-item text-center" role="listitem">
             <div class="flex justify-center items-baseline border-b border-dotted border-gray-300 pb-1">
-              <h3 class="text-lg font-medium"><%= item.item_name %></h3>
-              <span class="text-lg font-medium ml-4"><%= number_to_currency(item.price) %></span>
+              <h3 class="text-lg font-medium" tabindex="0"><%= item.item_name %></h3>
+              <span class="text-lg font-medium ml-4" tabindex="0"><%= number_to_currency(item.price) %></span>
             </div>
-            <p class="text-gray-600 text-sm mt-2"><%= item.item_description %></p>
-          </div>
+            <p class="text-gray-600 text-sm mt-2" tabindex="0"><%= item.item_description %></p>
+          </li>
           <% if index < items.size - 1 %>
-            <hr class="my-4 border-t-2 border-gray-200">
+            <hr class="my-4 border-t-2 border-gray-200" aria-hidden="true">
           <% end %>
         <% end %>
-      </div>
-    </div>
+      </ul>
+    </section>
   <% end %>
 </div>
