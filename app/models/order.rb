@@ -22,7 +22,7 @@ class Order < ApplicationRecord
     preparing: 2,
     ready: 3,
     delivered: 4,
-    payed: 5,
+    paid: 5,
     cancelled: 6
   }
 
