@@ -12,6 +12,6 @@ class OrdersController < ResourceController
     end
 
     def trusted_params
-      params.require(:order).permit(:customer_id, :due_date, order_items_attributes: [:id, :item_id, :quantity, :price, :_destroy])
+      params.require(:order).permit(:customer_id, :due_date, order_items_attributes: [:id, :item_id, :quantity, :oth, :price, :_destroy])
     end
 end

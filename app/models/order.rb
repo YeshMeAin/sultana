@@ -82,7 +82,7 @@ class Order < ApplicationRecord
     [{
       name: 'Order Items',
       collection: order_items.joins(:item)
-        .select('items.name AS item_name, order_items.price AS item_price, order_items.quantity, (order_items.quantity * order_items.price) AS total_price, order_items.notes')
+        .select('items.name AS item_name, order_items.price AS item_price, order_items.quantity, (order_items.quantity * order_items.price) AS total_price, order_items.notes, order_items.oth')
     }]
   end
 
