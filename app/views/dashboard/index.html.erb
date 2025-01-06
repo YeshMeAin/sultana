@@ -28,6 +28,48 @@
     </div>
   </div>
 
+
+  <div class="mt-8">
+    <h2 class="text-lg font-medium text-gray-900 mb-4">Open Orders</h2>
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @open_orders.each do |order| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap"><%= order.id %></td>
+            <td class="px-6 py-4 whitespace-nowrap"><%= order.due_date %></td>
+            <td class="px-6 py-4 whitespace-nowrap"><%= order.customer.name %></td>
+            <td class="px-6 py-4 whitespace-nowrap"><%= order.status.humanize %></td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%
+=begin%>
+ <% case order.status %>
+              <% when 'pending' %>
+                <%= link_to 'Confirm', confirm_order_path(order), method: :post, class: "text-indigo-600 hover:text-indigo-900" %>
+              <% when 'confirmed' %>
+                <%= link_to 'Prepare', prepare_order_path(order), method: :post, class: "text-indigo-600 hover:text-indigo-900" %>
+              <% when 'preparing' %>
+                <%= link_to 'Ready', ready_order_path(order), method: :post, class: "text-indigo-600 hover:text-indigo-900" %>
+              <% when 'ready' %>
+                <%= link_to 'Deliver', deliver_order_path(order), method: :post, class: "text-indigo-600 hover:text-indigo-900" %>
+              <% end %> 
+<%
+=end%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
   <div class="mt-8">
     <h2 class="text-lg font-medium text-gray-900 mb-4">Quick Actions</h2>
     <div class="flex flex-wrap gap-4">
