@@ -75,7 +75,7 @@ class Order < ApplicationRecord
         .group('orders.id')
         .to_a
     
-    result.sum { |row| row['average_order_value'] } / result.size
+    result.any? ? result.sum { |row| row['average_order_value'] } / result.size : 0
   end
 
   def associated_collections
