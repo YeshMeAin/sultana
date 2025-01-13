@@ -7,7 +7,7 @@ class ResourceController < ApplicationController
 
 
   def index
-    instance_variable_set("@resources", resource_class.all)
+    instance_variable_set("@resources", resource_class.index_order.all)
     
     render 'shared/resource_index'
   end

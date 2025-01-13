@@ -9,17 +9,23 @@ class Item < ApplicationRecord
   has_many :recipes, dependent: :destroy
   accepts_nested_attributes_for :recipes, reject_if: :all_blank, allow_destroy: true
 
+  scope :index_order, -> { order(category_id: :asc, name: :asc) }
+
   scope :with_prices, -> {
     left_joins(menu_items: :menu)
     .select('items.id as item_id, items.name as name, COALESCE(CASE WHEN menus.currently_displayed = true THEN menu_items.price ELSE 0 END, 0) AS price')
   }
 
   def self.table_attributes
-    [:name, :description]
+    [:name, :description, :category_name]
   end
 
   def self.show_attributes
     [:name, :description, :updated_at, :created_at]
+  end
+
+  def category_name
+    category&.display_name
   end
 
   def associated_collections
