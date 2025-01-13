@@ -14,6 +14,7 @@ class Item < ApplicationRecord
   scope :with_prices, -> {
     left_joins(menu_items: :menu)
     .select('items.id as item_id, items.name as name, COALESCE(CASE WHEN menus.currently_displayed = true THEN menu_items.price ELSE 0 END, 0) AS price')
+    .order('items.name ASC')
   }
 
   def self.table_attributes
