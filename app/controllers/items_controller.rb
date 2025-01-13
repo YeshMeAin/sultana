@@ -9,7 +9,7 @@ class ItemsController < ResourceController
     end
 
     def set_available_products
-      @available_products = Product.order(:category_id).select(:id, :name)
+      @available_products = Product.select(:id, :name)
     end
 
     def trusted_params
