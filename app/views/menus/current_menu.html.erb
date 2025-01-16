@@ -14,12 +14,24 @@
 </section>
 
 <% @menu_items.group_by(&:category_name).each do |category, items| %>
-  <section class="menu-section" aria-labelledby="category-<%= category.parameterize %>">
-    <h2 id="category-<%= category.parameterize %>" class="menu-category-title" tabindex="0">
-      <%= category %>
-    </h2>
+  <section class="menu-section" data-controller="collapse">
+    <button 
+      data-action="collapse#toggle"
+      class="menu-section__collapse-button w-full flex items-center justify-between py-2 text-center"
+      aria-expanded="false"
+      aria-controls="category-content-<%= category.parameterize %>"
+    >
+      <h2 id="category-<%= category.parameterize %>" class="menu-category-title w-full" tabindex="0">
+        <%= category %>
+      </h2>
+      <svg class="menu-section__collapse-icon w-4 h-4 transition-transform duration-200 rotate-180" data-collapse-target="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
     
-    <ul class="menu-items-list">
+    <ul id="category-content-<%= category.parameterize %>" 
+        class="menu-section__collapsible-list"
+        data-collapse-target="content">
       <% items.each_with_index do |item, index| %>
         <%= render "menu_item", item: item, show_divider: index < items.size - 1 %>
       <% end %>

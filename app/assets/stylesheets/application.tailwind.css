@@ -62,4 +62,31 @@
   .menu-item-divider {
     @apply my-4 border-t-2 border-gray-200;
   }
+
+  .menu-section__collapsible-list {
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  
+  .menu-section__collapsible-list--collapsed {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .menu-section__collapsible-list--expanded {
+    max-height: 2000px;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .menu-section__collapse-button {
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .menu-section__collapse-icon {
+    transition: transform 0.4s ease;
+  }
 }
