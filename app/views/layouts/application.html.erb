@@ -11,6 +11,7 @@
   </head>
 
   <body class="m-0 p-0">
+  <div class="min-h-screen bg-cover bg-repeat" style="background-image: url(<%= asset_path('smaller_succulent_pattern.png') %>); background-size: 300px;" role="img" aria-label="Decorative background pattern">
     <%= render "layouts/navbar" %>
     <main>
       <div id="flash">
@@ -18,5 +19,6 @@
       </div>
       <%= yield %>
     </main>
+  </div>
   </body>
 </html>
