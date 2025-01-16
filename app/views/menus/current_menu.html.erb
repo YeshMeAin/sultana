@@ -11,8 +11,8 @@
         <% items.each_with_index do |item, index| %>
           <li class="menu-item text-center" role="listitem">
             <div class="flex justify-center items-baseline border-b border-dotted border-gray-300 pb-1">
+              <span class="text-lg font-medium ml-4 mr-4" tabindex="0"><%= number_to_currency(item.price) %></span>
               <h3 class="text-lg font-medium" tabindex="0"><%= item.item_name %></h3>
-              <span class="text-lg font-medium ml-4" tabindex="0"><%= number_to_currency(item.price) %></span>
             </div>
             <p class="text-gray-600 text-sm mt-2" tabindex="0"><%= item.item_description %></p>
           </li>
