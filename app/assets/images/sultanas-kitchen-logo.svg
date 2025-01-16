@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60">
+  <!-- Background text shadow for depth -->
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1" result="shadow"/>
+    </filter>
+  </defs>
+  
+  <!-- Main text - using a sage/desert green color -->
+  <text x="150" y="40" 
+        text-anchor="middle" 
+        fill="#85997A"
+        style="font-family: 'Brush Script MT', cursive; font-size: 42px;">
+    Sultana's Kitchen
+  </text>
+  
+  <!-- Decorative swashes in matching color -->
+  <path d="M50 45 C80 45, 90 42, 100 40" 
+        stroke="#85997A" 
+        fill="none" 
+        stroke-width="1"/>
+  <path d="M200 45 C220 45, 230 42, 250 40" 
+        stroke="#85997A" 
+        fill="none" 
+        stroke-width="1"/>
+</svg>
