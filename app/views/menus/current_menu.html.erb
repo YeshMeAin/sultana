@@ -1,23 +1,55 @@
-  
-  <% @menu_items.group_by(&:category_name).each do |category, items| %>
-    <section class="max-w-md md:max-w-lg lg:max-w-6xl mx-auto px-6 py-8 bg-white bg-opacity-90 rounded-lg shadow-lg mt-12" aria-labelledby="category-<%= category.parameterize %>">
-      <h2 id="category-<%= category.parameterize %>" class="text-2xl font-semibold text-center mb-8 text-gray-800" tabindex="0">
-        <%= category %>
-      </h2>
-      
-      <ul class="space-y-6">
-        <% items.each_with_index do |item, index| %>
-          <li class="menu-item text-center" role="listitem">
-            <div class="flex justify-center items-baseline border-b border-dotted border-gray-300 pb-1">
-              <span class="text-lg font-medium ml-4 mr-4" tabindex="0"><%= number_to_currency(item.price) %></span>
-              <h3 class="text-lg font-medium" tabindex="0"><%= item.item_name %></h3>
-            </div>
-            <p class="text-gray-600 text-sm mt-2" tabindex="0"><%= item.item_description %></p>
-          </li>
-          <% if index < items.size - 1 %>
-            <hr class="my-4 border-t-2 border-gray-200" aria-hidden="true">
-          <% end %>
-        <% end %>
-      </ul>
-    </section>
-  <% end %>
+<section class="menu-section" aria-labelledby="header-disclaimer-text">
+  <h2 id="header-disclaimer-text" class="menu-category-title" tabindex="0">
+    <div class="text-center">
+      <div dir="rtl" class="font-bold">מינימום הזמנה 100 ש״ח.</div>
+      <br>
+      <br>
+      <div dir="rtl" class="font-bold">הזמנות בוואטסאפ בלבד.</div>
+      <br>
+      <br>
+      <div dir="rtl" class="text-sm text-gray-600">
+        אזהרת אלרגנים: המטבח שלנו מטפל במוצרים המכילים אגוזים, גלוטן, חלב, ביצים ורכיבים אלרגניים נוספים. למרות שאנו נוקטים בכל אמצעי הזהירות, איננו יכולים להבטיח שהמנות שלנו נקיות לחלוטין מאלרגנים. אנא יידעו אותנו לגבי כל אלרגיה או רגישות למזון בעת ההזמנה.
+      </div>    </div>
+  </h2>
+</section>
+
+<% @menu_items.group_by(&:category_name).each do |category, items| %>
+  <section class="menu-section" aria-labelledby="category-<%= category.parameterize %>">
+    <h2 id="category-<%= category.parameterize %>" class="menu-category-title" tabindex="0">
+      <%= category %>
+    </h2>
+    
+    <ul class="menu-items-list">
+      <% items.each_with_index do |item, index| %>
+        <%= render "menu_item", item: item, show_divider: index < items.size - 1 %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<%# Legend Section %>
+<%# TODO: Replace placeholders with labels %>
+<section class="menu-section" aria-labelledby="legend-section">
+  <h2 id="legend-section" class="menu-category-title" tabindex="0">
+    <div class="text-center">
+      <div dir="rtl" class="font-bold">מקרא סימונים:</div>
+      <div class="legend-items mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div dir="rtl">🌱 - טבעוני</div>
+        <div dir="rtl">🥜 - מכיל אגוזים</div>
+        <div dir="rtl">🌾 - מכיל גלוטן</div>
+        <div dir="rtl">🥛 - מכיל חלב</div>
+      </div>
+    </div>
+  </h2>
+</section>
+
+<%# Allergies Disclaimer %>
+<section class="menu-section" aria-labelledby="allergies-disclaimer">
+  <h2 id="allergies-disclaimer" class="menu-category-title" tabindex="0">
+    <div class="text-center">
+      <div dir="rtl" class="text-sm text-gray-600">
+        אזהרת אלרגנים: המטבח שלנו מטפל במוצרים המכילים אגוזים, גלוטן, חלב, ביצים ורכיבים אלרגניים נוספים. למרות שאנו נוקטים בכל אמצעי הזהירות, איננו יכולים להבטיח שהמנות שלנו נקיות לחלוטין מאלרגנים. אנא יידעו אותנו לגבי כל אלרגיה או רגישות למזון בעת ההזמנה.
+      </div>
+    </div>
+  </h2>
+</section>
