@@ -1,76 +1,73 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="sm:flex sm:items-center py-5">
-    <div class="sm:flex-auto">
-      <h1 class="text-2xl font-semibold text-gray-900">Admin Dashboard</h1>
-    </div>
-  </div>
+<div class="bg-gray-50/85 min-h-[calc(100vh-4rem)] my-8 mx-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
 
-  <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
-    <div class="overflow-hidden rounded-lg bg-white shadow">
-      <div class="p-5">
-        <h3 class="text-sm font-medium text-gray-500">Orders This Month</h3>
-        <p class="mt-1 text-3xl font-semibold text-gray-900"><%= @orders_count_this_month %></p>
+    <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <div class="overflow-hidden rounded-lg bg-white shadow">
+        <div class="p-5">
+          <h3 class="text-sm font-medium text-gray-500">Orders This Month</h3>
+          <p class="mt-1 text-3xl font-semibold text-gray-900"><%= @orders_count_this_month %></p>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-lg bg-white shadow">
+        <div class="p-5">
+          <h3 class="text-sm font-medium text-gray-500">Average Order Value</h3>
+          <p class="mt-1 text-3xl font-semibold text-gray-900"><%= number_to_currency(@average_order_value) %></p>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-lg bg-white shadow">
+        <div class="p-5">
+          <h3 class="text-sm font-medium text-gray-500">Revenue This Month</h3>
+          <p class="mt-1 text-3xl font-semibold text-gray-900"><%= number_to_currency(@payed_this_month) %></p>
+        </div>
       </div>
     </div>
 
-    <div class="overflow-hidden rounded-lg bg-white shadow">
-      <div class="p-5">
-        <h3 class="text-sm font-medium text-gray-500">Average Order Value</h3>
-        <p class="mt-1 text-3xl font-semibold text-gray-900"><%= number_to_currency(@average_order_value) %></p>
-      </div>
-    </div>
 
-    <div class="overflow-hidden rounded-lg bg-white shadow">
-      <div class="p-5">
-        <h3 class="text-sm font-medium text-gray-500">Revenue This Month</h3>
-        <p class="mt-1 text-3xl font-semibold text-gray-900"><%= number_to_currency(@payed_this_month) %></p>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="mt-8">
-    <h2 class="text-lg font-medium text-gray-900 mb-4">Open Orders</h2>
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        <% @open_orders.each do |order| %>
+    <div class="mt-8">
+      <h2 class="text-lg font-medium text-gray-900 mb-4">Open Orders</h2>
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
           <tr>
-            <td class="px-6 py-4 whitespace-nowrap"><%= order.id %></td>
-            <td class="px-6 py-4 whitespace-nowrap"><%= order.due_date %></td>
-            <td class="px-6 py-4 whitespace-nowrap"><%= order.customer.name %></td>
-            <td class="px-6 py-4 whitespace-nowrap"><%= order.status.humanize %></td>
-            <td class="px-6 py-4 whitespace-nowrap" data-controller="order-status" data-status="<%= order.status %>" data-order-id="<%= order.id %>">
-              <button type="button" data-action="click->order-status#performAction" data-order-status-target="ctaButton" class="text-indigo-600 hover:text-indigo-900 hidden">
-                <!-- Button text will be set by the controller -->
-              </button>
-            </td>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @open_orders.each do |order| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.id %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.due_date %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.customer.name %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.status.humanize %></td>
+              <td class="px-6 py-4 whitespace-nowrap" data-controller="order-status" data-status="<%= order.status %>" data-order-id="<%= order.id %>">
+                <button type="button" data-action="click->order-status#performAction" data-order-status-target="ctaButton" class="text-indigo-600 hover:text-indigo-900 hidden">
+                  <!-- Button text will be set by the controller -->
+                </button>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-  <div class="mt-8">
-    <h2 class="text-lg font-medium text-gray-900 mb-4">Quick Actions</h2>
-    <div class="flex flex-wrap gap-4">
-      <%= link_to current_menu_path, 
-          target: "_blank",
-          data: { turbo: false },
-          class: "inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-        </svg>
-        View Current Menu
-      <% end %>
+    <div class="mt-8">
+      <h2 class="text-lg font-medium text-gray-900 mb-4">Quick Actions</h2>
+      <div class="flex flex-wrap gap-4">
+        <%= link_to current_menu_path, 
+            target: "_blank",
+            data: { turbo: false },
+            class: "inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+          View Current Menu
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

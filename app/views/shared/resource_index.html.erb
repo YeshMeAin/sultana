@@ -1,32 +1,34 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-controller="resource-table">
-  <%= render "shared/modal" %>
+<div class="bg-gray-50/85 min-h-[calc(100vh-4rem)] my-8 mx-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8" data-controller="resource-table">
+    <%= render "shared/modal" %>
 
-  <div class="sm:flex sm:items-center py-5">
-    <div class="sm:flex-auto">
-      <h1 class="text-2xl font-semibold text-gray-900"><%= @resource_name.pluralize.titleize %></h1>
+    <div class="sm:flex sm:items-center py-5">
+      <div class="sm:flex-auto">
+        <h1 class="text-2xl font-semibold text-gray-900"><%= @resource_name.pluralize.titleize %></h1>
+      </div>
+      <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+        <%= link_to "New #{@resource_name.titleize}",
+                    "#",
+                    class: "inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700",
+                    data: { 
+                      action: "resource-table#openNewModal",
+                      turbo_frame: "resource_modal" 
+                    } %>
+      </div>
     </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <%= link_to "New #{@resource_name.titleize}",
-                  "#",
-                  class: "inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700",
-                  data: { 
-                    action: "resource-table#openNewModal",
-                    turbo_frame: "resource_modal" 
-                  } %>
-    </div>
-  </div>
 
-  <div class="mt-4">
-    <div class="relative z-0">
-      <input type="text" 
-             placeholder="Search..." 
-             class="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:ring-indigo-500"
-             data-resource-table-target="searchInput"
-             data-action="input->resource-table#search">
+    <div class="mt-4">
+      <div class="relative z-0">
+        <input type="text" 
+               placeholder="Search..." 
+               class="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-indigo-500 focus:ring-indigo-500"
+               data-resource-table-target="searchInput"
+               data-action="input->resource-table#search">
+      </div>
     </div>
-  </div>
 
-  <div id="<%= controller_name %>">
-    <%= render partial: "shared/resource_table", locals: { resources: @resources, resource_class: @resource_class } %>
+    <div id="<%= controller_name %>">
+      <%= render partial: "shared/resource_table", locals: { resources: @resources, resource_class: @resource_class } %>
+    </div>
   </div>
 </div>
