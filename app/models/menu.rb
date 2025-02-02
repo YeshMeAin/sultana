@@ -22,7 +22,7 @@ class Menu < ApplicationRecord
       .where.not(categories: { id: nil })
       .select(
         'items.name as item_name, items.description as item_description, categories.sort_order as category_sort_order,
-         categories.display_name as category_name, menu_items.price as price'
+         categories.display_name as category_name, menu_items.price as price, items.is_vegan as is_vegan'
         )
       .order('categories.sort_order, items.name')
   end
