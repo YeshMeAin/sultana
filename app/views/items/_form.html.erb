@@ -30,6 +30,10 @@
       <%= form.collection_select :category_id, Category.all, :id, :display_name, { prompt: "Select a category" }, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
     </div>
 
+    <div>
+      <%= form.label :is_vegan, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.check_box :is_vegan, class: "rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+    </div>
 
     <div data-controller="nested-form">
       <template data-nested-form-target="template">

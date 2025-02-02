@@ -1,7 +1,10 @@
 <li class="menu-item text-center" role="listitem">
   <div class="menu-item-container">
+     <% if item.is_vegan %>
+      <span class="vegan-label" tabindex="0" aria-label="טבעוני"> טבעוני </span>
+  <% end %>
     <span class="menu-item-price" tabindex="0"><%= number_to_currency(item.price) %></span>
-    <h3 class="menu-item-name" tabindex="0"><%= item.item_name %></h3>
+    <h3 class="menu-item-name" tabindex="0"> <%= item.item_name %></h3>
   </div>
   <p class="menu-item-description" tabindex="0"><%= item.item_description %></p>
 </li>
