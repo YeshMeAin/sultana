@@ -3,11 +3,10 @@
 one:
   name: MyString
   units: MyString
-  price_per_unit: 1.5
-  in_bulk: false
+  category: MyString
 
 two:
   name: MyString
   units: MyString
-  price_per_unit: 1.5
-  in_bulk: false
+  category: MyString
+

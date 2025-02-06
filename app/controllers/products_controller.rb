@@ -7,6 +7,6 @@ class ProductsController < ResourceController
     end
 
     def trusted_params
-      params.require(:product).permit(:name, :price_per_unit, :units, :in_bulk)
+      params.require(:product).permit(:name, :units, :category)
     end
 end

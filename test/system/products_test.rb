@@ -14,10 +14,9 @@ class ProductsTest < ApplicationSystemTestCase
     visit products_url
     click_on "New product"
 
-    check "In bulk" if @product.in_bulk
     fill_in "Name", with: @product.name
-    fill_in "Price per unit", with: @product.price_per_unit
     fill_in "Units", with: @product.units
+    fill_in "Category", with: @product.category
     click_on "Create Product"
 
     assert_text "Product was successfully created"
@@ -28,10 +27,9 @@ class ProductsTest < ApplicationSystemTestCase
     visit product_url(@product)
     click_on "Edit this product", match: :first
 
-    check "In bulk" if @product.in_bulk
     fill_in "Name", with: @product.name
-    fill_in "Price per unit", with: @product.price_per_unit
     fill_in "Units", with: @product.units
+    fill_in "Category", with: @product.category
     click_on "Update Product"
 
     assert_text "Product was successfully updated"
