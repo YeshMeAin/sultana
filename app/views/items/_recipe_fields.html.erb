@@ -3,19 +3,22 @@
     <div class="flex-grow">
       <%= f.label :product_id, "Product" %>
       <%= f.collection_select :product_id, @available_products, :id, :name, { prompt: "Select a product" },
-            { class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+            { class: "form-input" } %>
     </div>
 
     <div class="w-32">
-      <%= f.label "Quantity" %>
-      <%= f.number_field :quantity_for_display, step: 0.5,
-            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+      <%= f.label "Display qty" %>
+      <%= f.number_field :quantity_for_display, step: 0.5, class: "form-input" %>
     </div>
 
     <div class="w-32">
-      <%= f.label "Units" %>
-      <%= f.text_field :units_for_display,
-            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+      <%= f.label "Display units" %>
+      <%= f.text_field :units_for_display, class: "form-input" %>
+    </div>
+
+    <div class="w-32">
+      <%= f.label "Calc qty" %>
+      <%= f.number_field :quantity_for_calculations, step: 0.5, class: "form-input" %>
     </div>
 
     <%= f.hidden_field :_destroy %>
