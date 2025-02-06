@@ -8,10 +8,10 @@ class Product < ApplicationRecord
   validates :name, uniqueness: true
 
   def self.table_attributes
-    [:name, :price_per_unit, :units, :in_bulk]
+    [:name, :price_per_unit, :units]
   end
 
   def self.show_attributes
-    [:name, :price_per_unit, :units, :in_bulk]
+    [:name, :price_per_unit, :units]
   end
 end
