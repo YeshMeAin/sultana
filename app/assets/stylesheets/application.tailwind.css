@@ -31,6 +31,10 @@
     @apply inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
   }
 
+  .whatsapp-order-button {
+    @apply inline-flex items-center rounded-md bg-green-600 px-4 py-3 text-base font-bold text-white shadow-md hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition-all duration-200 ease-in-out;
+  }
+
   .menu-section {
     @apply max-w-md md:max-w-lg lg:max-w-6xl mx-auto px-6 py-8 bg-white bg-opacity-90 rounded-lg shadow-lg mt-12;
   }
