@@ -14,6 +14,14 @@
     Sultana's Kitchen
   </text>
   
+  <!-- Hebrew subscript text -->
+  <text x="150" y="55" 
+        text-anchor="middle" 
+        fill="#85997A"
+        style="font-family: Arial, sans-serif; font-size: 18px; direction: rtl; unicode-bidi: bidi-override;">
+    מטבח מרפא
+  </text>
+  
   <!-- Decorative swashes in matching color -->
   <path d="M50 45 C80 45, 90 42, 100 40" 
         stroke="#85997A" 
