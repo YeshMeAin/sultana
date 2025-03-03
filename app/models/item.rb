@@ -18,11 +18,11 @@ class Item < ApplicationRecord
   }
 
   def self.table_attributes
-    [:name, :description, :category_name, :is_vegan]
+    [:name, :description, :category_name, :is_vegan, :is_popular, :is_new]
   end
 
   def self.show_attributes
-    [:name, :description, :updated_at, :created_at, :is_vegan]
+    [:name, :description, :updated_at, :created_at, :is_vegan, :is_popular, :is_new]
   end
 
   def category_name

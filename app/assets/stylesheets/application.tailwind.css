@@ -75,6 +75,14 @@
     @apply bg-green-200 text-green-800 font-semibold px-2 py-1 rounded;
   }
 
+  .popular-label {
+    @apply bg-yellow-200 text-yellow-800 font-semibold px-2 py-1 rounded;
+  }
+
+  .new-label {
+    @apply bg-blue-200 text-blue-800 font-semibold px-2 py-1 rounded;
+  }
+
   .menu-section__collapsible-list {
     overflow: hidden;
     transition: all 0.4s ease;

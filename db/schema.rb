@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_06_202928) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_03_111026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_06_202928) do
     t.datetime "updated_at", null: false
     t.bigint "category_id"
     t.boolean "is_vegan", default: false
+    t.boolean "is_popular", default: false
+    t.boolean "is_new", default: false
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["name"], name: "index_items_on_name"
   end
