@@ -23,5 +23,4 @@ module ResourceAttributes
   def associated_collections
     []
   end
-
 end
