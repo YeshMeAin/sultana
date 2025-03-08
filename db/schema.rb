@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_08_185116) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_08_194238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_08_185116) do
     t.datetime "updated_at", null: false
     t.integer "category"
     t.integer "calculation_units", default: 0
+    t.float "conversion_factor"
     t.index ["category"], name: "index_products_on_category"
     t.index ["name"], name: "index_products_on_name"
   end
@@ -125,14 +126,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_08_185116) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "vendors", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_vendors_on_name"
   end
 
   add_foreign_key "items", "categories"

@@ -84,9 +84,9 @@ class GroceryListManager
       
       order.order_items.includes(item: { recipes: :product }).each do |order_item|
         order_item.item.recipes.each do |recipe|
-          product_id = recipe.product_id
-          # Calculate required quantity based on order item quantity
-          required_quantity = recipe.quantity_for_calculations * order_item.quantity
+          product = recipe.product
+          required_quantity = product.adjusted_quantity(recipe.quantity) * order_item.quantity
+
           products_needed[product_id] += required_quantity
         end
       end

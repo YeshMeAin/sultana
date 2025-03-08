@@ -60,15 +60,20 @@ RSpec.describe DashboardController, type: :controller do
       allow(GroceryListManager).to receive(:get_list).and_return(grocery_list)
     end
 
-    it "returns JSON response" do
+    it "assigns @grocery_list" do
+      get :generate_grocery_list
+      expect(assigns(:grocery_list)).to eq(formatted_list)
+    end
+
+    it "renders the generate_grocery_list template for HTML request" do
+      get :generate_grocery_list
+      expect(response).to render_template(:generate_grocery_list)
+    end
+
+    it "returns JSON for JSON request" do
       get :generate_grocery_list, format: :json
       expect(response.content_type).to include('application/json')
       expect(JSON.parse(response.body)).to eq(formatted_list)
-    end
-    
-    it "returns 406 for HTML request" do
-      get :generate_grocery_list
-      expect(response.status).to eq(406) # Not Acceptable
     end
   end
 

@@ -14,9 +14,9 @@ class Product < ApplicationRecord
   }
 
   enum calculation_units: {
-    piece: 0,
-    gram: 1,
-    milliliter: 2
+    calc_piece: 0,
+    calc_gram: 1,
+    calc_milliliter: 2
   }
 
   enum category: {
@@ -36,5 +36,37 @@ class Product < ApplicationRecord
 
   def self.show_attributes
     [:name, :units, :category]
+  end
+
+  def self.format_quantity(amount, unit)
+    formatted_amount = amount.round(2)
+    
+    case unit.to_sym
+    when :gram
+      if formatted_amount >= 1000
+        "#{(formatted_amount / 1000.0).round(1)} kg"
+      else
+        "#{formatted_amount.to_f} g"
+      end
+    when :milliliter
+      if formatted_amount >= 1000
+        "#{(formatted_amount / 1000.0).round(1)} L"
+      else
+        "#{formatted_amount.to_f} ml"
+      end
+    else
+      "#{formatted_amount.to_f} #{unit}"
+    end
+  end
+
+  def adjusted_quantity(quantity)
+    if units.to_s == calculation_units.to_s.sub('calc_', '')
+      quantity
+    elsif units == 'piece' && conversion_factor.present?
+      quantity * conversion_factor
+    else 
+      Rails.logger.error("Invalid conversion for product #{name}: #{units}")
+      quantity
+    end
   end
 end

@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
     @grocery_list = format_grocery_list(GroceryListManager.get_list)
     
     respond_to do |format|
-      format.html { head :not_acceptable }
+      format.html
       format.json { render json: @grocery_list }
     end
   end
