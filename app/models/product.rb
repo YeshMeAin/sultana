@@ -9,11 +9,14 @@ class Product < ApplicationRecord
 
   enum units: {
     piece: 0,
-    kilogram: 1,
-    gram: 2,
-    liter: 3,
-    milliliter: 4,
-    package: 5
+    gram: 1,
+    milliliter: 2
+  }
+
+  enum calculation_units: {
+    piece: 0,
+    gram: 1,
+    milliliter: 2
   }
 
   enum category: {

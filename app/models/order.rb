@@ -1,5 +1,4 @@
 class Order < ApplicationRecord
-  include CacheableQueries
   include ResourceAttributes
 
   after_save :update_grocery_list, if: :saved_change_to_status?

@@ -19,8 +19,12 @@ Rails.application.routes.draw do
     resources :menus
     resources :categories
 
-
+    # Dashboard routes
+    get 'dashboard', to: 'dashboard#index'
     get 'generate_grocery_list', to: 'dashboard#generate_grocery_list'
+    post 'update_grocery_item', to: 'dashboard#update_grocery_item'
+    get 'refresh_grocery_list', to: 'dashboard#refresh_grocery_list'
+    
     get 'current_menu', to: 'menus#current_menu', as: :current_menu
   end
 

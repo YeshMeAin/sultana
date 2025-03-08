@@ -14,6 +14,6 @@ class ItemsController < ResourceController
 
     def trusted_params
       params.require(:item).permit(:name, :description, :price, :category_id, :is_vegan, :is_popular, :is_new,
-        recipes_attributes: [:id, :product_id, :quantity_for_calculations, :units_for_display, :quantity_for_display, :_destroy])
+        recipes_attributes: [:id, :product_id, :quantity, :_destroy])
     end
 end

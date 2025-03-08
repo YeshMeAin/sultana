@@ -28,6 +28,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false  # Optional: for LCOV format output
+  gem 'rails-controller-testing'
 end
 
 group :development do
