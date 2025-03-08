@@ -5,7 +5,5 @@ FactoryBot.define do
     is_vegan { false }
     is_popular { false }
     is_new { false }
-    category { create(:category) }
-    recipes { [create(:recipe)] }
   end
 end

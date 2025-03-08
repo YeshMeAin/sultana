@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   include CacheableQueries
   include ResourceAttributes
 
-  after_commit :clear_cache
+  after_save :update_grocery_list, if: :saved_change_to_status?
 
   belongs_to :customer
   has_many :order_items, dependent: :destroy
@@ -10,11 +10,9 @@ class Order < ApplicationRecord
   has_many :items, through: :order_items
 
   validates :customer, presence: true
-  validates :order_items, presence: true, unless: :cancelled?
-  validate :has_valid_items, unless: :cancelled?
 
   scope :since, ->(date) { where('orders.created_at > ?', date) } # explicit call to orders table is to allow usage with joins
-  scope :open_orders, -> { where.not(status: 'paid').order(created_at: :desc).includes(:customer) }
+  scope :open_orders, -> { where.not(status: ['paid', 'cancelled']).order(created_at: :desc).includes(:customer) }
 
   enum status: {
     pending: 0,
@@ -31,7 +29,7 @@ class Order < ApplicationRecord
   aasm column: :status, whiny_persistence: true do
     state :pending, initial: true
     state :confirmed, :preparing, :ready, :delivered
-    state :payed, :cancelled # final states
+    state :paid, :cancelled # final states
 
     event :confirm do
       transitions from: :pending, to: :confirmed
@@ -50,7 +48,7 @@ class Order < ApplicationRecord
     end
 
     event :pay do
-      transitions from: :delivered, to: :payed
+      transitions from: :delivered, to: :paid
     end
 
     event :cancel do
@@ -67,15 +65,16 @@ class Order < ApplicationRecord
   end
 
   def self.average_total_price(since: Time.at(0))
-    result = Order.since(since)
-        .joins(:order_items)
-        .select(
-          'AVG(order_items.quantity * order_items.price) AS average_order_value'
-        )
-        .group('orders.id')
-        .to_a
-    
-    result.any? ? result.sum { |row| row['average_order_value'] } / result.size : 0
+    # Use a subquery to first calculate the total for each order, then average those totals
+    subquery = Order.since(since)
+      .joins(:order_items)
+      .select('orders.id, SUM(order_items.quantity * order_items.price) AS order_total')
+      .group('orders.id')
+      .to_sql
+
+    Order.connection.select_value(
+      "SELECT AVG(order_total) FROM (#{subquery}) AS order_totals"
+    ).to_f
   end
 
   def associated_collections
@@ -105,12 +104,13 @@ class Order < ApplicationRecord
 
   private
 
-  def clear_cache
-    Rails.cache.delete_matched("#{self.class.cache_key_prefix}*")
-  end
-
-  def has_valid_items
-    errors.add(:base, "Order must have at least one item") if order_items.empty?
-    errors.add(:base, "Order items must have positive quantities") if order_items.any? { |item| item.quantity.to_f <= 0 }
+  def update_grocery_list
+    if previous_changes["status"] && previous_changes["status"][1] == "confirmed"
+      # Order was just confirmed - add items to grocery list
+      GroceryListManager.add_order(self)
+    elsif previous_changes["status"] && previous_changes["status"][0] == "confirmed"
+      # Order was moved from confirmed to another status - remove items from grocery list
+      GroceryListManager.remove_order(self)
+    end
   end
 end

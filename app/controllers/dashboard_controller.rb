@@ -11,6 +11,6 @@ class DashboardController < ApplicationController
   end
 
   def generate_grocery_list
-    # TODO: Implement
+    
   end
 end

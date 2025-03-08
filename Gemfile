@@ -13,6 +13,7 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem 'aasm'
+gem 'redis'
 
 
 gem "devise"
