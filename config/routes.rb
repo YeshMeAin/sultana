@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     root to: 'menus#current_menu', as: :unauthenticated_root
   end
 
+  get 'passover_menu', to: 'menus#passover_menu', as: :passover_menu
   get '/under_construction', to: 'pages#under_construction', as: :under_construction
 
   get "up" => "rails/health#show", as: :rails_health_check

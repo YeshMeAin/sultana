@@ -18,6 +18,11 @@ class MenusController < ResourceController
     end
   end
 
+  def passover_menu
+    @menu = Menu.find_by(name: 'Passover Menu')
+    @menu_items = @menu.menu_items_for_display
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_menu

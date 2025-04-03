@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_03_111026) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_03_182234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_03_111026) do
     t.integer "sort_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "customers", force: :cascade do |t|

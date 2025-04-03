@@ -1,0 +1,59 @@
+<section class="menu-section" aria-labelledby="header-disclaimer-text">
+  <h2 id="header-disclaimer-text" class="menu-category-title" tabindex="0">
+    <div class="text-center">
+      <div dir="rtl" class="font-bold text-center">מארז ליל הסדר - 500 ש״ח</div>
+      <br>
+      <br>
+      <div dir="rtl" class="font-bold flex justify-center">
+        <a href="https://wa.me/+972524000843" 
+           class="whatsapp-order-button" 
+           target="_blank">
+          להזמנות בוואטסאפ - לחצו כאן
+        </a>
+      </div>
+      <br>
+      <div dir="rtl" class="font-bold flex justify-center">
+        <a href="https://www.instagram.com/_eugenie_sultana?utm_source=sultana" 
+           class="instagram-button" 
+           target="_blank">
+          Instagram
+        </a>
+      </div>
+      <br>
+      <br>
+      <div dir="rtl" class="text-sm text-gray-600">
+        אזהרת אלרגנים: המטבח שלנו מטפל במוצרים המכילים אגוזים, גלוטן, חלב, ביצים ורכיבים אלרגניים נוספים. איננו יכולים להבטיח שהמנות שלנו נקיות לחלוטין מאלרגנים, גם אם אינם מסומנים. אנא יידעו אותנו לגבי כל אלרגיה או רגישות למזון בעת ההזמנה.
+      </div>    </div>
+  </h2>
+</section>
+
+<% @menu_items.group_by(&:category_name).each do |category_name, items| %>
+  <section class="menu-section">
+    <h2 id="category-<%= category_name.parameterize %>" class="menu-category-title w-full py-2 text-center text-3xl font-bold mb-0" tabindex="0">
+      <%= category_name %>
+    </h2>
+    
+    <% if items.first.category_description.present? %>
+      <div class="category-description text-center text-xl -mt-1 mb-5 italic">
+        <%= items.first.category_description %>
+      </div>
+    <% end %>
+    
+    <ul class="menu-section__list">
+      <% items.each_with_index do |item, index| %>
+        <%= render "menu_item", item: item, show_divider: index < items.size - 1 %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<%# Allergies Disclaimer %>
+<section class="menu-section" aria-labelledby="allergies-disclaimer">
+  <h2 id="allergies-disclaimer" class="menu-category-title" tabindex="0">
+    <div class="text-center">
+      <div dir="rtl" class="text-sm text-gray-600">
+        אזהרת אלרגנים: המטבח שלנו מטפל במוצרים המכילים אגוזים, גלוטן, חלב, ביצים ורכיבים אלרגניים נוספים. איננו יכולים להבטיח שהמנות שלנו נקיות לחלוטין מאלרגנים, גם אם אינם מסומנים. אנא יידעו אותנו לגבי כל אלרגיה או רגישות למזון בעת ההזמנה.
+      </div>
+    </div>
+  </h2>
+</section>

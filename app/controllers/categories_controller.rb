@@ -7,6 +7,6 @@ class CategoriesController < ResourceController
     end
 
     def category_params
-      params.require(:category).permit(:display_name, :slug, :is_active, :sort_order)
+      params.require(:category).permit(:display_name, :slug, :is_active, :sort_order, :description)
     end
 end
