@@ -87,7 +87,7 @@ class GroceryListManager
           product = recipe.product
           required_quantity = product.adjusted_quantity(recipe.quantity) * order_item.quantity
 
-          products_needed[product_id] += required_quantity
+          products_needed[product.id] += required_quantity
         end
       end
       
