@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_03_182234) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_05_134245) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
@@ -55,8 +54,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_03_182234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "price"
-    t.integer "quantity"
-    t.string "units"
     t.index ["item_id"], name: "index_menu_items_on_item_id"
     t.index ["menu_id"], name: "index_menu_items_on_menu_id"
   end
@@ -110,9 +107,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_03_182234) do
     t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "quantity_for_calculations"
-    t.string "units_for_display"
-    t.float "quantity_for_display"
+    t.float "quantity"
+    t.integer "units", default: 0, null: false
     t.index ["item_id"], name: "index_recipes_on_item_id"
     t.index ["product_id"], name: "index_recipes_on_product_id"
   end
