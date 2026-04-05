@@ -33,7 +33,7 @@ class Item < ApplicationRecord
     [{
       name: 'Recipe',
       collection: recipes.joins(:product)
-        .select('products.name as product_name, recipes.quantity_for_display as quantity, recipes.units_for_display as units')
+        .select('products.name as product_name, recipes.quantity as quantity, recipes.units as units')
     }]
   end
 end

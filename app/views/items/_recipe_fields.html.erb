@@ -7,22 +7,17 @@
     </div>
 
     <div class="w-32">
-      <%= f.label "Display qty" %>
-      <%= f.number_field :quantity_for_display, step: 0.5, class: "form-input" %>
+      <%= f.label :quantity, "Quantity" %>
+      <%= f.number_field :quantity, step: 0.5, class: "form-input" %>
     </div>
 
     <div class="w-32">
-      <%= f.label "Display units" %>
-      <%= f.text_field :units_for_display, class: "form-input" %>
-    </div>
-
-    <div class="w-32">
-      <%= f.label "Calc qty" %>
-      <%= f.number_field :quantity_for_calculations, step: 0.5, class: "form-input" %>
+      <%= f.label :units, "Units" %>
+      <%= f.select :units, Recipe.units.keys.map { |u| [u.humanize, u] }, { prompt: "Select" }, { class: "form-input" } %>
     </div>
 
     <%= f.hidden_field :_destroy %>
-    
+
     <div class="flex items-end pb-1">
       <%= button_tag type: 'button',
                      data: { action: "click->nested-form#remove" },
@@ -34,4 +29,4 @@
       <% end %>
     </div>
   </div>
-</div> 
+</div>
